@@ -26,7 +26,7 @@ class CommentForm extends Component {
     render(){
         return (
             <React.Fragment>
-            <Button outline onClick={this.toggleModal}>Add Comments</Button>
+            <Button outline onClick={this.toggleModal}>Submit Comment</Button>
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                 <ModalHeader toggle={this.toggleModal}>
                     <h3>Add Comments</h3>
