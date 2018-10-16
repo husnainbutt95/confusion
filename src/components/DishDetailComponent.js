@@ -1,11 +1,12 @@
 import React from 'react';
+import CommentForm from './CommentFormComponent';
 import { Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { Link } from 'react';
+import { Link } from 'react-router-dom';
 
     function RenderDish({dish}){
         if(dish != null){
             return (
-                <div className="col-12 col-md-5 m-1">
+                <React.Fragment>
                     <Card>
                         <CardImg top src={dish.image} alt={dish.name} />
                         <CardBody>
@@ -13,7 +14,7 @@ import { Link } from 'react';
                         <CardText>{dish.description}</CardText>
                         </CardBody>
                     </Card>
-                </div>
+                </React.Fragment>
             );
         }else{
             return (
@@ -25,13 +26,12 @@ import { Link } from 'react';
         if(comments != null){
            const dishComment = comments.map((comments) => {
                return (
-                <div className="col-12 col-md-5 m-1">
-                    <h4>Comments</h4> 
+                <React.Fragment> 
                     <ListGroup key = {comments.id}>
                         <ListGroupItem>{comments.comment}<br/>--{comments.author} 
                         </ListGroupItem>
                     </ListGroup>          
-                </div>
+                </React.Fragment>
                );
            });
             return dishComment;
@@ -40,7 +40,7 @@ import { Link } from 'react';
             return (<div>No comments</div>);
         }
     }
-    const DishDetail = (props) => {
+     const DishDetail = (props) => {
         if(props != null){
             return (
                 <div className="container">
@@ -59,8 +59,14 @@ import { Link } from 'react';
                         </div>
                     </div>
                     <div className="row">
-                        <RenderDish dish={props.dish} />
-                        <RenderComments comments={props.comments} />
+                        <div className="col-12 col-md-5 ml-1">
+                            <RenderDish dish={props.dish} />
+                        </div>
+                        <div className="col-12 col-md-5 ml-1">
+                            <h3>Comments</h3>
+                            <RenderComments comments={props.comments} />
+                            <CommentForm />
+                        </div>
                     </div>
                 </div>
             );
